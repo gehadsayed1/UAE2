@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>آمر القرهود | Amer Al Garhoud</title>
+
+    <!-- Fonts: Cairo for that authentic Arabic Govt look -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Cairo", "sans-serif"],
+            },
+            colors: {
+              amer: {
+                red: "#b91c1c", // Amer red
+                green: "#15803d", // Approx UAE Green
+                gold: "#b49459", // UAE Goldish
+                dark: "#1e293b",
+              },
+            },
+            backgroundImage: {
+              "hero-pattern":
+                "url('data:image/jpeg;base64,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')",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .service-card {
+        transition: all 0.3s ease;
+      }
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+          0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-slate-800 font-sans antialiased">
+    <div id="app">
+      <!-- Header / Top Bar -->
+      <header class="bg-white sticky top-0 z-50">
+        <div
+          class="container mx-auto px-4 py-3 flex items-center justify-between"
+        >
+          <!-- Logo Area -->
+          <div class="flex items-center gap-4">
+            <div
+              class="text-2xl font-bold text-slate-800 tracking-tighter flex items-center gap-2"
+            >
+              <div class="flex flex-col">
+                <span class="text-lg leading-tight">الخوري القرهود</span>
+                <span class="text-xs text-slate-500 font-normal"
+                  >مركز خدمات حكومي</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Nav Links (Desktop) -->
+          <nav
+            class="hidden md:flex gap-8 text-sm font-semibold text-slate-600"
+          >
+            <a href="#" class="hover:text-amer-green transition">الرئيسية</a>
+            <a href="#" class="hover:text-amer-green transition">عن الشركة</a>
+            <a href="#" class="hover:text-amer-green transition">خدماتنا</a>
+            <a href="#" class="hover:text-amer-green transition">اتصل بنا</a>
+          </nav>
+
+          <!-- User & Search -->
+          <div class="flex items-center gap-4">
+            <div class="relative hidden sm:block">
+              <input
+                type="text"
+                placeholder="بحث..."
+                class="bg-gray-100 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amer-green w-64 text-right"
+              />
+              <i
+                class="ph ph-magnifying-glass absolute left-3 top-2.5 text-gray-400"
+              ></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- UAE Flag Strip -->
+        <!-- Wavy Bottom Divider with UAE Flag Gradient -->
+        <div
+          class="absolute top-full left-0 w-full overflow-hidden leading-none z-50"
+        >
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+            class="relative block w-full h-[40px] md:h-[60px]"
+          >
+            <defs>
+              <linearGradient
+                id="uae-gradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  style="stop-color: #dc2626; stop-opacity: 1"
+                />
+                <stop
+                  offset="50%"
+                  style="stop-color: #16a34a; stop-opacity: 1"
+                />
+                <stop
+                  offset="100%"
+                  style="stop-color: #000000; stop-opacity: 1"
+                />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#uae-gradient)"
+              d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+            ></path>
+          </svg>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <section
+        class="relative bg-hero-pattern bg-cover bg-center bg-no-repeat min-h-[600px] flex items-center text-right px-4 overflow-hidden"
+      >
+        <!-- Overlay for better text readability -->
+        <div class="absolute inset-0  bg-white/20 backdrop-blur-[1px]"></div>
+
+        <!-- Decorative Curve Bottom -->
+        <div
+          class="absolute bottom-0 left-0 w-full overflow-hidden leading-none rotate-180"
+        ></div>
+
+        <div class="relative container z-10 max-w-2xl py-20 px-8 mr-0">
+          <h1
+            class="text-4xl md:text-5xl font-bold text-slate-800 mb-6 !leading-tight drop-shadow-sm"
+          >
+            مرحباً بك في آمر القرهود!
+            <br />
+            <span
+              class="text-3xl md:text-4xl font-normal text-slate-700 mt-2 block"
+              >كيف يمكننا خدمتك اليوم؟</span
+            >
+          </h1>
+
+          <div
+            class="flex flex-col sm:flex-row items-center justify-start gap-4 mt-10"
+          >
+            <button
+              class="bg-amer-red text-white hover:bg-red-700 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition flex items-center gap-2 min-w-[200px] justify-center"
+            >
+              <i class="ph ph-file-text text-3xl"></i>
+              تقديم طلب
+            </button>
+            <button
+              class="bg-amer-green text-white hover:bg-green-700 px-8 py-3 rounded-lg text-lg font-bold shadow-lg transition flex items-center gap-2 min-w-[200px] justify-center"
+            >
+              <i class="ph ph-calendar-check text-3xl"></i>
+              حجز موعد
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="py-16 px-4 bg-gray-50 -mt-6 relative z-20">
+        <div class="container mx-auto">
+          <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">
+            خدماتنا
+          </h2>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
+          >
+            <!-- Service Card Loop -->
+            <a
+              v-for="service in services"
+              :key="service.id"
+              :href="'service.html?type=' + service.id"
+              class="service-card block bg-white rounded-2xl p-6 text-center border border-gray-100 shadow-md hover:shadow-xl cursor-pointer group"
+            >
+              <div
+                class="w-20 h-20 mx-auto mb-4 bg-white rounded-xl border border-gray-200 flex items-center justify-center group-hover:border-amer-green transition"
+              >
+                <img
+                  :src="service.icon"
+                  alt=""
+                  class="w-12 h-12 object-contain"
+                />
+              </div>
+              <h3
+                class="text-xl font-bold text-slate-700 group-hover:text-amer-dark"
+              >
+                {{ service.name }}
+              </h3>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <span
+              class="text-amer-green font-bold text-sm tracking-wider uppercase"
+              >لماذا نحن؟</span
+            >
+            <h2 class="text-3xl font-bold text-slate-900 mt-2">
+              لماذا تختار آمر القرهود؟
+            </h2>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
+          >
+            <div class="text-center p-6">
+              <div
+                class="w-16 h-16 mx-auto bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 text-3xl"
+              >
+                <i class="ph ph-timer"></i>
+              </div>
+              <h3 class="font-bold text-lg mb-2">سرعة إنجاز المعاملات</h3>
+              <p class="text-gray-500 text-sm">
+                نضمن لك إنهاء معاملاتك في أسرع وقت ممكن وبدقة عالية.
+              </p>
+            </div>
+            <div class="text-center p-6">
+              <div
+                class="w-16 h-16 mx-auto bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-4 text-3xl"
+              >
+                <i class="ph ph-seal-check"></i>
+              </div>
+              <h3 class="font-bold text-lg mb-2">إجراءات معتمدة</h3>
+              <p class="text-gray-500 text-sm">
+                جميع خدماتنا معتمدة ورسمية من الجهات الحكومية المختصة.
+              </p>
+            </div>
+            <div class="text-center p-6">
+              <div
+                class="w-16 h-16 mx-auto bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-4 text-3xl"
+              >
+                <i class="ph ph-headset"></i>
+              </div>
+              <h3 class="font-bold text-lg mb-2">دعم فني مستمر</h3>
+              <p class="text-gray-500 text-sm">
+                فريق متخصص جاهز للرد على استفساراتكم طوال ساعات العمل.
+              </p>
+            </div>
+            <div class="text-center p-6">
+              <div
+                class="w-16 h-16 mx-auto bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-4 text-3xl"
+              >
+                <i class="ph ph-shield-check"></i>
+              </div>
+              <h3 class="font-bold text-lg mb-2">حماية وأمان البيانات</h3>
+              <p class="text-gray-500 text-sm">
+                نلتزم بأعلى معايير الخصوصية والأمان لحماية بياناتك الشخصية.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-slate-900">كيف تنجز معاملتك؟</h2>
+            <p class="text-gray-500 mt-2">خطوات بسيطة وسهلة لإنهاء إجراءاتك</p>
+          </div>
+
+          <div class="relative max-w-5xl mx-auto">
+            <!-- Line Connector (Desktop) -->
+            <div
+              class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-0"
+            ></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+              <!-- Step 1 -->
+              <div
+                class="bg-white p-6 rounded-xl shadow-sm text-center transform transition hover:-translate-y-2"
+              >
+                <div
+                  class="w-12 h-12 bg-amer-dark text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 border-4 border-gray-50"
+                >
+                  1
+                </div>
+                <h4 class="font-bold text-lg mb-2">اختر الخدمة</h4>
+                <p class="text-xs text-gray-500">
+                  تصفح قائمة الخدمات واختر المعاملة المطلوبة
+                </p>
+              </div>
+              <!-- Step 2 -->
+              <div
+                class="bg-white p-6 rounded-xl shadow-sm text-center transform transition hover:-translate-y-2"
+              >
+                <div
+                  class="w-12 h-12 bg-amer-green text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 border-4 border-gray-50"
+                >
+                  2
+                </div>
+                <h4 class="font-bold text-lg mb-2">أدخل البيانات</h4>
+                <p class="text-xs text-gray-500">
+                  قم بتعبئة النموذج وإرفاق المستندات اللازمة
+                </p>
+              </div>
+              <!-- Step 3 -->
+              <div
+                class="bg-white p-6 rounded-xl shadow-sm text-center transform transition hover:-translate-y-2"
+              >
+                <div
+                  class="w-12 h-12 bg-amer-dark text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 border-4 border-gray-50"
+                >
+                  3
+                </div>
+                <h4 class="font-bold text-lg mb-2">التحقق والمتابعة</h4>
+                <p class="text-xs text-gray-500">
+                  يقوم فريقنا بمراجعة الطلب والتواصل معك
+                </p>
+              </div>
+              <!-- Step 4 -->
+              <div
+                class="bg-white p-6 rounded-xl shadow-sm text-center transform transition hover:-translate-y-2"
+              >
+                <div
+                  class="w-12 h-12 bg-amer-green text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 border-4 border-gray-50"
+                >
+                  4
+                </div>
+                <h4 class="font-bold text-lg mb-2">استلم معاملتك</h4>
+                <p class="text-xs text-gray-500">
+                  يتم إنجاز المعاملة وإرسالها لك إلكترونياً
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="py-16 bg-amer-dark text-white relative overflow-hidden">
+        <!-- Background Decoration -->
+        <div
+          class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24"
+        ></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-gray-700"
+          >
+            <div class="p-4">
+              <div class="text-4xl md:text-5xl font-bold text-amer-gold mb-2">
+                +100,000
+              </div>
+              <div class="text-gray-300">معاملة منجزة</div>
+            </div>
+            <div class="p-4">
+              <div class="text-4xl md:text-5xl font-bold text-amer-gold mb-2">
+                99%
+              </div>
+              <div class="text-gray-300">نسبة رضا العملاء</div>
+            </div>
+            <div class="p-4">
+              <div class="text-4xl md:text-5xl font-bold text-amer-gold mb-2">
+                24/7
+              </div>
+              <div class="text-gray-300">خدمات متاحة إلكترونياً</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Banner -->
+      <section class="py-20 bg-amer-gold/10">
+        <div class="container mx-auto px-4 text-center">
+          <h2 class="text-4xl font-bold text-slate-800 mb-6">
+            هل أنت جاهز لتخليص معاملاتك؟
+          </h2>
+          <p class="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+            ابدأ الآن واستفد من خدماتنا الإلكترونية السريعة والآمنة. نحن هنا
+            لخدمتك.
+          </p>
+          <div class="flex justify-center gap-4">
+            <button
+              class="bg-amer-red text-white hover:bg-red-700 px-10 py-4 rounded-lg text-xl font-bold shadow-lg transition transform hover:-translate-y-1"
+            >
+              قدّم طلبك الآن
+            </button>
+            <button
+              class="bg-white text-slate-700 hover:bg-gray-100 border border-gray-200 px-10 py-4 rounded-lg text-xl font-bold shadow-sm transition"
+            >
+              اتصل بنا
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Us Section -->
+      <section class="py-16 bg-white relative z-10" id="contact">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <span class="text-amer-green font-bold text-sm tracking-wider uppercase">تواصل معنا</span>
+            <h2 class="text-3xl font-bold text-slate-900 mt-2">نحن هنا لخدمتك</h2>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <!-- Contact Info & Map -->
+            <div class="space-y-8">
+              <!-- Info Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition">
+                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-amer-gold shadow-sm mb-3">
+                    <i class="ph ph-phone text-2xl"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-800 mb-1">اتصل بنا</h4>
+                  <p class="text-sm text-slate-600" dir="ltr">04 204 4444</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition">
+                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-amer-gold shadow-sm mb-3">
+                    <i class="ph ph-envelope text-2xl"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-800 mb-1">البريد الإلكتروني</h4>
+                  <p class="text-sm text-slate-600">info@amer.ae</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition sm:col-span-2">
+                  <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-amer-gold shadow-sm mb-3">
+                    <i class="ph ph-clock text-2xl"></i>
+                  </div>
+                  <h4 class="font-bold text-slate-800 mb-1">ساعات العمل</h4>
+                  <p class="text-sm text-slate-600">الإثنين - الجمعة: 7:00 ص - 8:00 م</p>
+                  <p class="text-sm text-slate-600">الجمعة: 7:00 ص - 12:00 م | 2:00 م - 8:00 م</p>
+                </div>
+              </div>
+
+              <!-- Map -->
+              <div class="h-[300px] w-full rounded-2xl overflow-hidden shadow-md border border-gray-200">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.687664669866!2d55.3375!3d25.2475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d087790753b%3A0xe5a1b3780879555c!2sAmer%20Center%20-%20Al%20Garhoud!5e0!3m2!1sen!2sae!4v1703276000000!5m2!1sen!2sae" 
+                  width="100%" 
+                  height="100%" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+              <h3 class="text-xl font-bold text-slate-800 mb-6">أرسل لنا استفسارك</h3>
+              <form class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="space-y-2">
+                    <label class="text-sm font-bold text-slate-700">الاسم</label>
+                    <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amer-green focus:border-transparent outline-none transition bg-gray-50 focus:bg-white" placeholder="الاسم الكريم">
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-sm font-bold text-slate-700">البريد الإلكتروني</label>
+                    <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amer-green focus:border-transparent outline-none transition bg-gray-50 focus:bg-white" placeholder="name@example.com">
+                  </div>
+                </div>
+                
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-slate-700">الموضوع</label>
+                  <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amer-green focus:border-transparent outline-none transition bg-gray-50 focus:bg-white" placeholder="عنوان الرسالة">
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-slate-700">الرسالة</label>
+                  <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amer-green focus:border-transparent outline-none transition bg-gray-50 focus:bg-white resize-none" placeholder="اكتب استفسارك هنا..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-amer-green hover:bg-green-700 text-white font-bold py-4 rounded-lg shadow-md transition transform active:scale-95 flex items-center justify-center gap-2 mt-4">
+                  <i class="ph ph-paper-plane-right text-xl"></i>
+                  إرسال الرسالة
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="bg-slate-900 text-slate-300 pt-16 pb-8 border-t-4 border-amer-green"
+      >
+        <div class="container mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <!-- About -->
+            <div class="col-span-1 md:col-span-2">
+              <div class="flex items-center gap-3 mb-6">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Emblem_of_the_United_Arab_Emirates.svg/1200px-Emblem_of_the_United_Arab_Emirates.svg.png"
+                  alt="UAE"
+                  class="h-10 opacity-80 grayscale"
+                />
+                <h3 class="text-white text-xl font-bold">حول آمر القرهود</h3>
+              </div>
+              <p class="text-sm leading-relaxed text-gray-400 max-w-md">
+                مركز، يقدم الخدمات بشكل متميز يضمن الراحة والسعادة للمتعامل.
+                نسعى دائماً لتحقيق أعلى معايير الجودة والسرعة في إنجاز المعاملات
+                الحكومية وفقاً لرؤية الإمارات 2071.
+              </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+              <h4
+                class="text-white font-bold mb-6 border-r-4 border-amer-gold pr-3"
+              >
+                روابط مهمة
+              </h4>
+              <ul class="space-y-3 text-sm">
+                <li>
+                  <a href="#" class="hover:text-white transition block"
+                    >الرئيسية</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition block"
+                    >الخدمات</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition block"
+                    >عن المركز</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition block"
+                    >السياسات والشروط</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+              <h4
+                class="text-white font-bold mb-6 border-r-4 border-amer-gold pr-3"
+              >
+                تواصل معنا
+              </h4>
+              <ul class="space-y-4 text-sm">
+                <li class="flex items-center gap-3">
+                  <i class="ph ph-phone text-amer-gold text-lg"></i>
+                  <span dir="ltr">04 000 0000</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <i class="ph ph-envelope text-amer-gold text-lg"></i>
+                  <span>info@amer-garhoud.ae</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <i class="ph ph-map-pin text-amer-gold text-lg"></i>
+                  <span>القرهود، دبي، الإمارات العربية المتحدة</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="border-t border-slate-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500"
+          >
+            <p>© 2024 جميع الحقوق محفوظة لمركز آمر القرهود</p>
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-white"
+                ><i class="ph ph-facebook-logo text-lg"></i
+              ></a>
+              <a href="#" class="hover:text-white"
+                ><i class="ph ph-twitter-logo text-lg"></i
+              ></a>
+              <a href="#" class="hover:text-white"
+                ><i class="ph ph-instagram-logo text-lg"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            services: [
+              {
+                id: "visa",
+                name: "التأشيرات",
+                icon: "https://cdn-icons-png.flaticon.com/512/942/942748.png",
+              },
+              {
+                id: "residency",
+                name: "الإقامة",
+                icon: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+              },
+              {
+                id: "license",
+                name: "تجديد الرخصة",
+                icon: "https://cdn-icons-png.flaticon.com/512/1829/1829586.png",
+              },
+              {
+                id: "fines",
+                name: "دفع المخالفات",
+                icon: "https://cdn-icons-png.flaticon.com/512/2331/2331970.png",
+              },
+              {
+                id: "insurance",
+                name: "تأمين المركبات",
+                icon: "https://cdn-icons-png.flaticon.com/512/2967/2967350.png",
+              },
+              {
+                id: "id-services",
+                name: "خدمات الهوية",
+                icon: "https://cdn-icons-png.flaticon.com/512/747/747376.png",
+              },
+              {
+                id: "bills",
+                name: "تسديد الفواتير",
+                icon: "https://cdn-icons-png.flaticon.com/512/2489/2489756.png",
+              },
+              {
+                id: "inquiry",
+                name: "استعلام عن المعاملات",
+                icon: "https://cdn-icons-png.flaticon.com/512/942/942802.png",
+              },
+            ],
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
